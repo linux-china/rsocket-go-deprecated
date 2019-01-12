@@ -57,3 +57,4 @@ func TestRSocketRequestResponse(t *testing.T) {
 # References
 
 * Reactive Extensions for the Go language: https://github.com/ReactiveX/RxGo
+* ReactiveX: http://reactivex.io/
