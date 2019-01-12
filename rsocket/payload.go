@@ -1,6 +1,8 @@
 package rsocket
 
+import "bytes"
+
 type Payload struct {
-	Metadata []byte
-	Data     []byte
+	Metadata *bytes.Buffer
+	Data     *bytes.Buffer
 }
