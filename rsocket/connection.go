@@ -4,12 +4,17 @@ import (
 	"github.com/reactivex/rxgo/observable"
 )
 
+// duplex connection
+type DuplexConnection struct {
+}
+
 //  RSocket Server
 type RSocketServer struct {
 	uri           string
 	acceptor      RSocketAccept
 	handler       RSocket
 	errorConsumer RSocketErrorConsumer
+	connection    DuplexConnection
 	RSocket
 }
 
@@ -40,6 +45,7 @@ type RSocketClient struct {
 	setupPayload     Payload
 	handler          RSocket
 	errorConsumer    RSocketErrorConsumer
+	connection       DuplexConnection
 	RSocket
 }
 
