@@ -1,0 +1,53 @@
+@startuml
+
+interface Availability {
+   Availability() float64
+}
+
+interface Closeable {
+  OnClose() observable.Observable
+}
+
+interface Disposable {
+  Dispose()
+  IsDisposed() bool
+}
+
+class DuplexConnection extends Availability, Closeable  {
+
+}
+
+class RSocketRequester extends Disposable{
+  conn DuplexConnection
+}
+
+class RSocketResponder {
+  conn DuplexConnection
+}
+
+class Payload {
+  Metadata *bytes.Buffer
+  Data     *bytes.Buffer
+}
+
+class Frame {
+  streamId  int32
+  FrameType byte
+  Flags     int16
+  payload  Payload
+}
+
+
+RSocketRequester -left-* DuplexConnection
+RSocketResponder -right-* DuplexConnection
+
+
+Frame ..* Payload: Refer metadata & data
+
+DuplexConnection --> Frame: send & receive
+
+RSocketRequester ---> Payload
+RSocketResponder ---> Payload
+
+
+@enduml
