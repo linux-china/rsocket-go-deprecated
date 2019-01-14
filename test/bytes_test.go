@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"sync/atomic"
 	"testing"
+	"time"
 )
 
 var counter uint32 = 0
@@ -14,6 +15,11 @@ func TestBytesBuffer(t *testing.T) {
 }
 
 func TestAtomicCounter(t *testing.T) {
-	atomic.AddUint32(&counter, 1)
+	for i := 0; i < 5000; i++ {
+		go func() {
+			atomic.AddUint32(&counter, 1)
+		}()
+	}
+	time.Sleep(time.Second)
 	print(counter)
 }
