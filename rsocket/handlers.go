@@ -18,8 +18,8 @@ type Disposable interface {
 }
 
 type (
-	// setup function
-	RSocketSetup func(payload Payload, socket RSocket) RSocket
+	// accept for setup function
+	RSocketAccept func(payload Payload, socket RSocket) RSocket
 
 	// request_response function
 	RSocketRequestResponse func(payload Payload) observable.Observable
@@ -31,6 +31,8 @@ type (
 	RSocketRequestStream func(payload Payload) observable.Observable
 	// request channel
 	RSocketRequestChannel func(payloads observable.Observable) observable.Observable
+
+	RSocketErrorConsumer func(exception interface{})
 )
 
 type RSocket struct {
