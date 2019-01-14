@@ -128,3 +128,7 @@ func (client *RSocketRequester) Start() *RSocketRequester {
 func (client *RSocketRequester) Dispose() {
 
 }
+
+func (client *RSocketRequester) IsDisposed() bool {
+	return client.connection.disposed
+}
