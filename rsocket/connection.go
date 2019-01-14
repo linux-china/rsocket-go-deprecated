@@ -4,14 +4,17 @@ import (
 	"github.com/reactivex/rxgo/observable"
 )
 
+//  RSocket Server
 type RSocketServer struct {
-	uri     string
-	handler RSocket
+	uri           string
+	acceptor      RSocketAccept
+	handler       RSocket
+	errorConsumer RSocketErrorConsumer
 	RSocket
 }
 
-func (server *RSocketServer) Acceptor(handler RSocket) *RSocketServer {
-	server.handler = handler
+func (server *RSocketServer) Acceptor(acceptor RSocketAccept) *RSocketServer {
+	server.acceptor = acceptor
 	return server
 }
 
@@ -20,20 +23,23 @@ func (server *RSocketServer) Transport(uri string) *RSocketServer {
 	return server
 }
 
-func (server *RSocketServer) Start() *RSocketServer {
+func (server *RSocketServer) ErrorConsumer(errorConsumer RSocketErrorConsumer) *RSocketServer {
+	server.errorConsumer = errorConsumer
 	return server
 }
 
-func (server *RSocketServer) onClose() observable.Observable {
+func (server *RSocketServer) Start() observable.Observable {
 	return observable.Just(server)
 }
 
+//  Rsocket Client
 type RSocketClient struct {
 	uri              string
 	metadataMimeType string
 	dataMimeType     string
 	setupPayload     Payload
 	handler          RSocket
+	errorConsumer    RSocketErrorConsumer
 	RSocket
 }
 
@@ -59,6 +65,11 @@ func (client *RSocketClient) Acceptor(handler RSocket) *RSocketClient {
 
 func (client *RSocketClient) Transport(uri string) *RSocketClient {
 	client.uri = uri
+	return client
+}
+
+func (client *RSocketClient) ErrorConsumer(errorConsumer RSocketErrorConsumer) *RSocketClient {
+	client.errorConsumer = errorConsumer
 	return client
 }
 
