@@ -1,9 +1,9 @@
 package rsocket
 
-func Connect() *RSocketClient {
-	return &RSocketClient{}
+func Connect() *RSocketRequester {
+	return &RSocketRequester{}
 }
 
-func Receive() *RSocketServer {
-	return &RSocketServer{}
+func Receive() *RSocketResponder {
+	return &RSocketResponder{}
 }

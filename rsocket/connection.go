@@ -50,8 +50,8 @@ func (conn *DuplexConnection) IsDisposed() bool {
 	return conn.disposed
 }
 
-//  RSocket Server
-type RSocketServer struct {
+//  RSocket Responder
+type RSocketResponder struct {
 	uri           string
 	acceptor      RSocketAccept
 	handler       RSocket
@@ -60,27 +60,27 @@ type RSocketServer struct {
 	RSocket
 }
 
-func (server *RSocketServer) Acceptor(acceptor RSocketAccept) *RSocketServer {
+func (server *RSocketResponder) Acceptor(acceptor RSocketAccept) *RSocketResponder {
 	server.acceptor = acceptor
 	return server
 }
 
-func (server *RSocketServer) Transport(uri string) *RSocketServer {
+func (server *RSocketResponder) Transport(uri string) *RSocketResponder {
 	server.uri = uri
 	return server
 }
 
-func (server *RSocketServer) ErrorConsumer(errorConsumer RSocketErrorConsumer) *RSocketServer {
+func (server *RSocketResponder) ErrorConsumer(errorConsumer RSocketErrorConsumer) *RSocketResponder {
 	server.errorConsumer = errorConsumer
 	return server
 }
 
-func (server *RSocketServer) Start() *RSocketServer {
+func (server *RSocketResponder) Start() *RSocketResponder {
 	return server
 }
 
-//  Rsocket Client
-type RSocketClient struct {
+//  Rsocket requester
+type RSocketRequester struct {
 	uri              string
 	metadataMimeType string
 	dataMimeType     string
@@ -91,40 +91,40 @@ type RSocketClient struct {
 	RSocket
 }
 
-func (client *RSocketClient) MetadataMimeType(metadataMimeType string) *RSocketClient {
+func (client *RSocketRequester) MetadataMimeType(metadataMimeType string) *RSocketRequester {
 	client.metadataMimeType = metadataMimeType
 	return client
 }
 
-func (client *RSocketClient) DataMimeType(dataMimeType string) *RSocketClient {
+func (client *RSocketRequester) DataMimeType(dataMimeType string) *RSocketRequester {
 	client.dataMimeType = dataMimeType
 	return client
 }
 
-func (client *RSocketClient) SetupPayload(setupPayload Payload) *RSocketClient {
+func (client *RSocketRequester) SetupPayload(setupPayload Payload) *RSocketRequester {
 	client.setupPayload = setupPayload
 	return client
 }
 
-func (client *RSocketClient) Acceptor(handler RSocket) *RSocketClient {
+func (client *RSocketRequester) Acceptor(handler RSocket) *RSocketRequester {
 	client.handler = handler
 	return client
 }
 
-func (client *RSocketClient) Transport(uri string) *RSocketClient {
+func (client *RSocketRequester) Transport(uri string) *RSocketRequester {
 	client.uri = uri
 	return client
 }
 
-func (client *RSocketClient) ErrorConsumer(errorConsumer RSocketErrorConsumer) *RSocketClient {
+func (client *RSocketRequester) ErrorConsumer(errorConsumer RSocketErrorConsumer) *RSocketRequester {
 	client.errorConsumer = errorConsumer
 	return client
 }
 
-func (client *RSocketClient) Start() *RSocketClient {
+func (client *RSocketRequester) Start() *RSocketRequester {
 	return client
 }
 
-func (client *RSocketClient) Dispose() {
+func (client *RSocketRequester) Dispose() {
 
 }
