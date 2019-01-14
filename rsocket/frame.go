@@ -4,7 +4,7 @@ type Frame struct {
 	streamId  int32
 	FrameType byte
 	Flags     int16
-	Payload
+	payload   Payload
 }
 
 func (frame *Frame) HasMetadata() bool {
