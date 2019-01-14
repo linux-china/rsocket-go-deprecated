@@ -75,8 +75,8 @@ func (server *RSocketServer) ErrorConsumer(errorConsumer RSocketErrorConsumer) *
 	return server
 }
 
-func (server *RSocketServer) Start() observable.Observable {
-	return observable.Just(server)
+func (server *RSocketServer) Start() *RSocketServer {
+	return server
 }
 
 //  Rsocket Client
@@ -121,8 +121,8 @@ func (client *RSocketClient) ErrorConsumer(errorConsumer RSocketErrorConsumer) *
 	return client
 }
 
-func (client *RSocketClient) Start() observable.Observable {
-	return observable.Just(client)
+func (client *RSocketClient) Start() *RSocketClient {
+	return client
 }
 
 func (client *RSocketClient) Dispose() {
