@@ -4,8 +4,50 @@ import (
 	"github.com/reactivex/rxgo/observable"
 )
 
+type Availability interface {
+	Availability() float64
+}
+
+type Closeable interface {
+	OnClose() observable.Observable
+}
+
+type Disposable interface {
+	Dispose()
+	IsDisposed() bool
+}
+
 // duplex connection
 type DuplexConnection struct {
+	disposed bool
+}
+
+func (conn *DuplexConnection) SendOne(frame Frame) observable.Observable {
+	return observable.Empty()
+}
+
+func (conn *DuplexConnection) Send(frames observable.Observable) observable.Observable {
+	return observable.Empty()
+}
+
+func (conn *DuplexConnection) Receive() observable.Observable {
+	return observable.Empty()
+}
+
+func (conn *DuplexConnection) Availability() float64 {
+	return 1.0
+}
+
+func (conn *DuplexConnection) OnClose() observable.Observable {
+	return observable.Empty()
+}
+
+func (conn *DuplexConnection) Dispose() {
+	conn.disposed = true
+}
+
+func (conn *DuplexConnection) IsDisposed() bool {
+	return conn.disposed
 }
 
 //  RSocket Server
