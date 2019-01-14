@@ -18,3 +18,7 @@ func NewSetupFrame(metadataMimeType string, dataMimeType string, payload Payload
 func NewRequestFrame(streamId int32, payload Payload, initialRequestN int32) Frame {
 	return Frame{}
 }
+
+type (
+	FrameDecoder func(payload Payload) Frame
+)
