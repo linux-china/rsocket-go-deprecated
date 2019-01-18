@@ -54,6 +54,33 @@ func TestRSocketRequestResponse(t *testing.T) {
 ```
 
 
+### Convention
+
+* More type alias for functions than interfaces
+
+```
+
+type (
+	// accept for setup function
+	RSocketAccept func(payload Payload, socket RSocket) RSocket
+
+	// request_response function
+	RSocketRequestResponse func(payload Payload) observable.Observable
+
+	// fire and forget function
+	RSocketFireAndForget func(payload Payload) observable.Observable
+
+	// request stream function
+	RSocketRequestStream func(payload Payload) observable.Observable
+	// request channel
+	RSocketRequestChannel func(payloads observable.Observable) observable.Observable
+
+	RSocketErrorConsumer func(exception interface{})
+)
+
+```
+
+
 # References
 
 * Reactive Extensions for the Go language: https://github.com/ReactiveX/RxGo
