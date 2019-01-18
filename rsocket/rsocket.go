@@ -7,7 +7,3 @@ func Connect() *RSocketRequester {
 func Receive() *RSocketResponder {
 	return &RSocketResponder{}
 }
-
-func Handle() *RSocketServer {
-	return &RSocketServer{}
-}
